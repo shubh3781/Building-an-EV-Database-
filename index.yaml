@@ -1,0 +1,7 @@
+indexes:
+
+- kind: RatingsInfo
+  properties:
+  - name: ev_id
+  - name: time
+    direction: desc

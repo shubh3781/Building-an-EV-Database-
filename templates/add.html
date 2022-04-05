@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <title>ELECTRIC VEHICAL</title>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet"
+    href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script>
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+     </script>
+</head>
+<style>
+body {
+  background-image: url('https://wallpaperaccess.com/full/5227237.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+.h1, h1 {float: right;
+    font-size: calc(1.325rem + .9vw);
+    color: red;
+}
+.h2, h2 {
+    font-size: calc(1.325rem + .9vw);
+    color: green;
+}
+</style>
+<body>
+ <h1> ADD EV's</h1>
+ <div id="firebase-auth-container"></div>
+ <div class="bgimage">
+    <a href="#default"><img src="https://pngimg.com/uploads/electric_car/electric_car_PNG45.png"/></a>
+  </div>
+ <button id="sign-out"style="float:right" hidden="true" class="btn btn-danger">Sign out</button>
+ <div id="login-info" hidden="true">
+ {% if user_data %}
+        <tr>
+            <td><b>Name</b> {{ user_data['name'] }}</td>
+            <!-- <td></td> -->
+            <span style="float: right"><b>Email</b> {{ user_data['email'] }}</span>
+            <!-- <td></td> -->
+            <td>
+                <form action="/">
+                    <input type="submit" class="form-control btn btn-primary" value="Home"style="background-color:rgb(102,202,0)">
+                </form>
+            </td>
+        </tr>
+        <h2> ADD EV CAR</h2>
+    <form action="/add_ev" method="post">
+            <tr>
+                <td>Name</td>
+                <td>
+                    <input type="text" class="form-control" required name="name" placeholder="Enter ev name" >
+                </td>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td>
+                    <input type="text" class="form-control" required name="manufacturer" placeholder="Enter manufacturer name">
+                </td>
+            </tr>
+            <tr>
+                <td>Year</td>
+                <td>
+                    <input type="text" class="form-control" onkeypress="return isNumber(event)" required name="year" placeholder="Enter model year">
+                </td>
+            </tr>
+            <tr>
+                <td>Battery Size</td>
+                <td>
+                    <input type="text" class="form-control" onkeypress="return isNumber(event)" required name="battery_size" placeholder="Enter Battery Size">
+                </td>
+            </tr>
+            <tr>
+                <td>WLTP Range</td>
+                <td>
+                    <input type="text" class="form-control" onkeypress="return isNumber(event)" required name="wltp_range" placeholder="Enter WLTP range">
+                </td>
+            </tr>
+            <tr>
+                <td>Cost</td>
+                <td>
+                    <input type="text" class="form-control" onkeypress="return isNumber(event)" required name="cost" placeholder="Enter cost">
+                </td>
+            </tr>
+            <tr>
+                <td>Power</td>
+                <td>
+                    <input type="text" class="form-control" onkeypress="return isNumber(event)" required name="power" placeholder="Enter ev power(KW)" >
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                  <b><input type="submit" class="btn btn-success form-control" value="ADD car"style="background-color:darkblue"></b>
+                </td>
+            </tr>
+    </form>
+ {% elif error_message %}
+ <p>Error Message: {{ error_message }}</p>
+ {% endif %}
+ </div>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+<script src="{{ url_for('static', filename='app-setup.js') }}"></script>
+</html>
